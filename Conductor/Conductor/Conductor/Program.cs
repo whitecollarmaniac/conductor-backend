@@ -152,7 +152,6 @@ builder.Services.AddRateLimiter(options =>
     });
 });
 
-var frontendUrl = builder.Configuration["FrontendUrl"] ?? "http://localhost:5173";
 
 // Session/heartbeat configuration (config-driven)
 var heartbeatIntervalSeconds = builder.Configuration.GetValue<int?>("Sessions:HeartbeatSeconds") ?? 30;
@@ -181,8 +180,8 @@ builder.Services.AddCors(options =>
         {
             policy
                 .WithOrigins(
-                "https://conductor.watch",
-                "http://conductor.watch"
+                    "https://conductor.watch",
+                    "http://conductor.watch"
                 )
                 .AllowAnyHeader()
                 .AllowAnyMethod()

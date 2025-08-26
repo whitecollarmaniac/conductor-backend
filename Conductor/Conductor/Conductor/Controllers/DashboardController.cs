@@ -81,11 +81,37 @@ namespace Conductor.Controllers
                 .OrderByDescending(sub => sub.Id) // latest first
                 .AsEnumerable() // switch to client-side before grouping (avoids JsonElement issues)
                 .GroupBy(sub => sub.SessionId)
+                .ToDictionary(g => g.Key, g => {
+                    var latest = g.First();
+                    var payload = latest.Payload.RootElement;
+                    string pagePath = "/";
+                    if (payload.TryGetProperty("url", out var urlProp))
+                    {
+                        if (Uri.TryCreate(urlProp.GetString(), UriKind.Absolute, out var uri))
+                        {
+                            pagePath = uri.PathAndQuery;
+                        }
+                    }
+                    if (string.IsNullOrWhiteSpace(pagePath)) pagePath = $"/page-{latest.PageId}";
+
+                    return new {
+                        latest.PageId,
+                        latest.CreatedAt,
+                        PagePath = pagePath,
+                        Fields = ExtractSanitizedFields(payload)
+                    };
+                });
+
+            // Pre-compute latest decision per session to derive post-redirect page
+            var latestSteps = _db.NextSteps
+                .OrderByDescending(ns => ns.Id)
+                .AsEnumerable()
+                .GroupBy(ns => ns.SessionId)
                 .ToDictionary(g => g.Key, g => new {
-                    g.First().PageId,
+                    g.First().RedirectPath,
+                    g.First().Status,
                     g.First().CreatedAt,
-                    RawPayload = g.First().Payload.RootElement.GetRawText(),
-                    Fields = ExtractSanitizedFields(g.First().Payload.RootElement)
+                    g.First().DecidedAt
                 });
 
             var sessions = allSessions.Select(s => new
@@ -99,7 +125,8 @@ namespace Conductor.Controllers
                 hasPendingTicket = _db.NextSteps.Any(ns => ns.SessionId == s.Id && ns.Status == "pending"),
                 hasDecidedTicket = _db.NextSteps.Any(ns => ns.SessionId == s.Id && ns.Status == "decided"),
                 hasProcessedTicket = _db.NextSteps.Any(ns => ns.SessionId == s.Id && ns.Status == "processed"),
-                LatestSubmission = latestSubs.TryGetValue(s.Id, out var sub) ? sub : null
+                LatestSubmission = latestSubs.TryGetValue(s.Id, out var sub) ? sub : null,
+                LatestDecision = latestSteps.TryGetValue(s.Id, out var step) ? step : null
             })
             .Select(s => new
             {
@@ -109,6 +136,15 @@ namespace Conductor.Controllers
                 s.StartedAt,
                 s.LastSeenAt,
                 s.LatestSubmission,
+                s.LatestDecision,
+                CurrentPage =
+                    s.LatestSubmission == null && s.LatestDecision != null && !string.IsNullOrWhiteSpace(s.LatestDecision.RedirectPath)
+                        ? s.LatestDecision.RedirectPath
+                        : (s.LatestSubmission != null && s.LatestDecision != null
+                            ? (((s.LatestDecision.DecidedAt ?? s.LatestDecision.CreatedAt) > s.LatestSubmission.CreatedAt) && !string.IsNullOrWhiteSpace(s.LatestDecision.RedirectPath)
+                                ? s.LatestDecision.RedirectPath
+                                : s.LatestSubmission.PagePath)
+                            : (s.LatestSubmission != null ? s.LatestSubmission.PagePath : null)),
                 PendingTicketId = s.hasPendingTicket ? _db.NextSteps.Where(ns => ns.SessionId == s.Id && ns.Status == "pending").OrderByDescending(ns => ns.Id).Select(ns => ns.Id).FirstOrDefault() : (int?)null,
                 status = SessionStatusHelper.DetermineSessionStatus(
                     s.hasPendingTicket,

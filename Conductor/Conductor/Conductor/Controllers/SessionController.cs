@@ -105,6 +105,13 @@ namespace Conductor.Controllers
 
                 _logger.LogInformation("Session created: {SessionId} from {IP}", session.Id, ip);
 
+                // Derive initial page path from request.Url so dashboard can show page immediately
+                string initialPagePath = "/";
+                if (!string.IsNullOrWhiteSpace(request.Url) && Uri.TryCreate(request.Url, UriKind.Absolute, out var reqUri))
+                {
+                    initialPagePath = reqUri.PathAndQuery;
+                }
+
                 // Broadcast session creation to dashboard
                 await _hub.Clients.Group("dashboard").SendAsync("sessionCreated", new
                 {
@@ -114,7 +121,8 @@ namespace Conductor.Controllers
                     userAgent = session.UserAgent,
                     startedAt = session.StartedAt,
                     isActive = session.IsActive,
-                    status = "live" // ensure dashboards mark new sessions as live immediately
+                    status = "live", // ensure dashboards mark new sessions as live immediately
+                    currentPage = initialPagePath
                 });
 
                 return Ok(new
@@ -211,7 +219,48 @@ namespace Conductor.Controllers
                 // _db.Events.Add(pageViewEvent);
                 await _db.SaveChangesAsync();
 
-                _logger.LogInformation("Page view tracked for session {SessionId}: {Path}", sessionId, request.Path);
+                // Determine page path
+                string pagePath = request.Path ?? "/";
+                if (string.IsNullOrWhiteSpace(pagePath) && !string.IsNullOrWhiteSpace(request.Url))
+                {
+                    if (Uri.TryCreate(request.Url, UriKind.Absolute, out var uri))
+                    {
+                        pagePath = uri.PathAndQuery;
+                    }
+                }
+                if (string.IsNullOrWhiteSpace(pagePath)) pagePath = "/";
+
+                // Determine status consistently
+                var heartbeatInterval = 30; // seconds
+                var inactiveThreshold = TimeSpan.FromSeconds(heartbeatInterval * 2);
+
+                var nextStepCounts = _db.NextSteps
+                    .Where(ns => ns.SessionId == sessionId)
+                    .GroupBy(ns => ns.Status)
+                    .Select(g => new { Status = g.Key, Count = g.Count() })
+                    .ToList();
+
+                var hasPendingTicket = nextStepCounts.Any(x => x.Status == "pending");
+                var hasDecidedTicket = nextStepCounts.Any(x => x.Status == "decided");
+                var hasProcessedTicket = nextStepCounts.Any(x => x.Status == "processed");
+                var hasCompletedTicket = nextStepCounts.Any(x => x.Status == "completed");
+
+                var correctStatus = SessionStatusHelper.DetermineSessionStatus(
+                    hasPendingTicket, hasDecidedTicket, hasProcessedTicket, hasCompletedTicket,
+                    session.IsActive, session.LastSeenAt, inactiveThreshold);
+
+                // Broadcast to dashboards so initial/refresh shows correct page
+                await _hub.Clients.Group("dashboard").SendAsync("sessionUpdated", new
+                {
+                    id = session.Id,
+                    sessionId = session.Id,
+                    isActive = session.IsActive,
+                    lastSeenAt = session.LastSeenAt,
+                    status = correctStatus,
+                    currentPage = pagePath
+                });
+
+                _logger.LogInformation("Page view tracked and broadcast for session {SessionId}: {Path}", sessionId, pagePath);
 
                 return Ok(new { success = true });
             }

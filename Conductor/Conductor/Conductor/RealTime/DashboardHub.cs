@@ -128,12 +128,45 @@ namespace Conductor.RealTime
             var q = Context.GetHttpContext()?.Request.Query;
             var role = q?["role"].ToString();
             var siteId = q?["siteId"].ToString();
+            var sessionId = q?["sessionId"].ToString();
             
             if (role == "site" && !string.IsNullOrWhiteSpace(siteId))
             {
                 // Notify dashboards that this site is now disconnected
                 await Clients.Group($"site-{siteId}").SendAsync("SiteDisconnected", new { siteId, timestamp = DateTimeOffset.UtcNow });
                 _logger.LogInformation("SITE DISCONNECTION: Site {SiteId} disconnected from hub", siteId);
+            }
+
+            // If this was a site client tied to a specific session, proactively mark it inactive immediately
+            if (role == "site" && !string.IsNullOrWhiteSpace(sessionId))
+            {
+                if (int.TryParse(sessionId, out var sid))
+                {
+                    try
+                    {
+                        var session = await _db.Sessions.FindAsync(sid);
+                        if (session != null)
+                        {
+                            session.IsActive = false;
+                            session.LastSeenAt = DateTimeOffset.UtcNow;
+                            await _db.SaveChangesAsync();
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogWarning(ex, "Failed to mark session {SessionId} inactive on site disconnect", sid);
+                    }
+
+                    // Broadcast to dashboards so UI doesn't stay in 'waiting'
+                    await Clients.Group("dashboard").SendAsync("sessionUpdated", new
+                    {
+                        id = sid,
+                        sessionId = sid,
+                        isActive = false,
+                        lastSeenAt = DateTimeOffset.UtcNow,
+                        status = "inactive"
+                    });
+                }
             }
             
             await base.OnDisconnectedAsync(exception);

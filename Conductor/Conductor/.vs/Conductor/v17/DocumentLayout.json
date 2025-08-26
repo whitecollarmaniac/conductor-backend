@@ -3,20 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|c:\\users\\machi\\desktop\\conductor\\conductor\\conductor\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|solutionrelative:conductor\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|c:\\users\\machi\\desktop\\conductor\\conductor\\conductor\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|solutionrelative:conductor\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|c:\\users\\machi\\desktop\\conductor\\conductor\\conductor\\controllers\\submissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|solutionrelative:conductor\\controllers\\submissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|c:\\users\\machi\\desktop\\conductor\\conductor\\conductor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|solutionrelative:conductor\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|c:\\users\\machi\\desktop\\conductor\\conductor\\conductor\\controllers\\submissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|solutionrelative:conductor\\controllers\\submissioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|c:\\users\\machi\\desktop\\conductor\\conductor\\conductor\\controllers\\redirectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|solutionrelative:conductor\\controllers\\redirectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|c:\\users\\machi\\desktop\\conductor\\conductor\\conductor\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|solutionrelative:conductor\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|c:\\users\\machi\\desktop\\conductor\\conductor\\conductor\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|solutionrelative:conductor\\controllers\\sessioncontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|c:\\users\\machi\\desktop\\conductor\\conductor\\conductor\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -49,10 +53,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|c:\\users\\machi\\desktop\\conductor\\conductor\\conductor\\db\\appdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|solutionrelative:conductor\\db\\appdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|c:\\users\\machi\\desktop\\conductor\\conductor\\conductor\\controllers\\redirectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C3215630-D7B2-4B32-B88B-759330678D71}|Conductor\\Conductor.csproj|solutionrelative:conductor\\controllers\\redirectcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,11 +62,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "AdminController.cs",
               "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Controllers\\AdminController.cs",
               "RelativeDocumentMoniker": "Conductor\\Controllers\\AdminController.cs",
@@ -79,21 +79,38 @@
               "EditorCaption": ""
             },
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{56df62a4-05a3-4e5b-aa1a-99371ccfb997}"
+            },
+            {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Program.cs",
+              "RelativeDocumentMoniker": "Conductor\\Program.cs",
+              "ToolTip": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Program.cs",
+              "RelativeToolTip": "Conductor\\Program.cs",
+              "ViewState": "AgIAAIgAAAAAAAAAAAAswLkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-14T07:49:48.442Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "SessionController.cs",
               "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Controllers\\SessionController.cs",
               "RelativeDocumentMoniker": "Conductor\\Controllers\\SessionController.cs",
               "ToolTip": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Controllers\\SessionController.cs",
               "RelativeToolTip": "Conductor\\Controllers\\SessionController.cs",
-              "ViewState": "AgIAAD4BAAAAAAAAAAAIwFwBAAAQAAAAAAAAAA==",
+              "ViewState": "AgIAAG8BAAAAAAAAAAAIwI0BAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-19T09:06:56.416Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "Conductor\\Controllers\\AuthController.cs",
@@ -106,20 +123,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "SubmissionController.cs",
               "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Controllers\\SubmissionController.cs",
               "RelativeDocumentMoniker": "Conductor\\Controllers\\SubmissionController.cs",
-              "ToolTip": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Controllers\\SubmissionController.cs",
-              "RelativeToolTip": "Conductor\\Controllers\\SubmissionController.cs",
-              "ViewState": "AgIAAGoAAAAAAAAAAAAUwI8AAAAqAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Controllers\\SubmissionController.cs*",
+              "RelativeToolTip": "Conductor\\Controllers\\SubmissionController.cs*",
+              "ViewState": "AgIAAJ4AAAAAAAAAAAAcwLcAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-14T08:46:59.28Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\AuthService.cs",
               "RelativeDocumentMoniker": "Conductor\\AuthService.cs",
@@ -132,7 +149,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "Notify.cs",
               "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Telegram\\Notify.cs",
               "RelativeDocumentMoniker": "Conductor\\Telegram\\Notify.cs",
@@ -145,32 +162,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 3,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\appsettings.json",
               "RelativeDocumentMoniker": "Conductor\\appsettings.json",
               "ToolTip": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\appsettings.json",
               "RelativeToolTip": "Conductor\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAVAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2025-08-14T09:13:19.889Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 2,
               "Title": "RedirectController.cs",
               "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Controllers\\RedirectController.cs",
               "RelativeDocumentMoniker": "Conductor\\Controllers\\RedirectController.cs",
               "ToolTip": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Controllers\\RedirectController.cs",
               "RelativeToolTip": "Conductor\\Controllers\\RedirectController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAEAAAAAAAAAA==",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAYwK4AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-14T08:49:18.215Z"
+              "WhenOpened": "2025-08-14T08:49:18.215Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "DashboardHub.cs",
               "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\RealTime\\DashboardHub.cs",
               "RelativeDocumentMoniker": "Conductor\\RealTime\\DashboardHub.cs",
@@ -183,7 +201,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "AppDb.cs",
               "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Db\\AppDb.cs",
               "RelativeDocumentMoniker": "Conductor\\Db\\AppDb.cs",
@@ -196,7 +214,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Entities.cs",
               "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Models\\Entities.cs",
               "RelativeDocumentMoniker": "Conductor\\Models\\Entities.cs",
@@ -209,28 +227,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "DashboardController.cs",
               "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Controllers\\DashboardController.cs",
               "RelativeDocumentMoniker": "Conductor\\Controllers\\DashboardController.cs",
               "ToolTip": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Controllers\\DashboardController.cs",
               "RelativeToolTip": "Conductor\\Controllers\\DashboardController.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAUwFoAAAAzAAAAAAAAAA==",
+              "ViewState": "AgIAACsAAAAAAAAAAAAUwHQAAAAzAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-14T07:59:11.483Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Program.cs",
-              "RelativeDocumentMoniker": "Conductor\\Program.cs",
-              "ToolTip": "C:\\Users\\machi\\Desktop\\Conductor\\Conductor\\Conductor\\Program.cs",
-              "RelativeToolTip": "Conductor\\Program.cs",
-              "ViewState": "AgIAACUBAAAAAAAAAAAWwDUBAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-14T07:49:48.442Z",
               "EditorCaption": ""
             }
           ]

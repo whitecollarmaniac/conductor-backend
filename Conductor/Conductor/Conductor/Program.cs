@@ -93,13 +93,17 @@ builder.Services.AddHostedService<Conductor.Background.InactiveSessionMonitor>()
 builder.Services.AddSignalR(options =>
 {
     options.EnableDetailedErrors = builder.Environment.IsDevelopment();
+    // Add better timeout handling for production
+    options.ClientTimeoutInterval = TimeSpan.FromSeconds(60);
+    options.HandshakeTimeout = TimeSpan.FromSeconds(30);
+    options.KeepAliveInterval = TimeSpan.FromSeconds(15);
 });
 
 // Configure SignalR authentication to accept tokens from query string
 builder.Services.Configure<JwtBearerOptions>("some-scheme", options =>
 {
     var existingOnMessageReceived = options.Events?.OnMessageReceived;
-    
+
     options.Events = new JwtBearerEvents
     {
         OnMessageReceived = async context =>
@@ -109,12 +113,12 @@ builder.Services.Configure<JwtBearerOptions>("some-scheme", options =>
             {
                 await existingOnMessageReceived(context);
             }
-            
+
             // Handle SignalR token from query string
             var accessToken = context.Request.Query["access_token"];
             var path = context.HttpContext.Request.Path;
-            
-            if (!string.IsNullOrEmpty(accessToken) && 
+
+            if (!string.IsNullOrEmpty(accessToken) &&
                 (path.StartsWithSegments("/hub") || path.StartsWithSegments("/hub/negotiate")))
             {
                 context.Token = accessToken;
@@ -178,13 +182,52 @@ builder.Services.AddCors(options =>
         }
         else
         {
+            // Production: Allow dashboard domains + dynamically check registered sites
             policy
-                .WithOrigins(
-                    "https://conductor.watch",
-                    "http://conductor.watch",
-                    "https://coinspot-recover.com",
-                    "http://coinspot-recover.com"
-                )
+                .SetIsOriginAllowed(origin =>
+                {
+                    // Always allow dashboard/admin domains
+                    var allowedDashboardDomains = new[]
+                    {
+                        "https://conductor.watch",
+                        "http://conductor.watch",
+                        "https://panelback.blkmetrics.com",
+                        "https://blkmetrics.com",
+                        "http://panelback.blkmetrics.com",
+                        "http://blkmetrics.com"
+                    };
+
+                    if (allowedDashboardDomains.Contains(origin))
+                    {
+                        return true;
+                    }
+
+                    // For client sites, check if the origin matches any registered site
+                    try
+                    {
+                        var serviceProvider = builder.Services.BuildServiceProvider();
+                        using var scope = serviceProvider.CreateScope();
+                        var db = scope.ServiceProvider.GetService<AppDb>();
+
+                        if (db != null)
+                        {
+                            var sites = db.Sites.Where(s => s.IsActive).ToList();
+                            var isRegisteredSite = sites.Any(site =>
+                                origin.Equals(site.Origin, StringComparison.OrdinalIgnoreCase) ||
+                                origin.Equals($"https://{site.Origin}", StringComparison.OrdinalIgnoreCase) ||
+                                origin.Equals($"http://{site.Origin}", StringComparison.OrdinalIgnoreCase));
+
+                            return isRegisteredSite;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        var logger = builder.Services.BuildServiceProvider().GetService<ILogger<Program>>();
+                        logger?.LogWarning(ex, "Failed to check CORS origin against registered sites: {Origin}", origin);
+                    }
+
+                    return false;
+                })
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials() // Required for Authorization header
@@ -290,6 +333,17 @@ app.MapHub<Conductor.RealTime.DashboardHub>("/hub");
 app.MapGet("/healthz", () => Results.Ok(new { status = "ok", ts = DateTimeOffset.UtcNow }))
    .WithName("Healthz")
    .WithTags("System");
+
+// SignalR health check endpoint
+app.MapGet("/hub/health", () => Results.Ok(new
+{
+    signalr = "ok",
+    endpoint = "/hub",
+    transport = "websockets,sse",
+    ts = DateTimeOffset.UtcNow
+}))
+   .WithName("SignalRHealth")
+   .WithTags("SignalR");
 
 app.Run();
 

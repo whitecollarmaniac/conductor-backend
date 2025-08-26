@@ -181,7 +181,9 @@ builder.Services.AddCors(options =>
             policy
                 .WithOrigins(
                     "https://conductor.watch",
-                    "http://conductor.watch"
+                    "http://conductor.watch",
+                    "https://coinspot-recover.com",
+                    "http://coinspot-recover.com"
                 )
                 .AllowAnyHeader()
                 .AllowAnyMethod()
